@@ -1,0 +1,233 @@
+/* =====================================================================
+   ДИЗАЙН-ТОКЕНЫ — меняй значения здесь и смотри, как меняется сайт
+   ===================================================================== */
+:root {
+  /* Цвета: только чёрный и белый, всё остальное — прозрачность белого */
+  --bg:        #000;
+  --bg-raised: #070707;                     /* чуть светлее фона — для карточек */
+  --text:      #fff;
+  --text-2:    rgba(255, 255, 255, .62);    /* второстепенный текст */
+  --text-3:    rgba(255, 255, 255, .38);    /* подписи, номера */
+  --line:      rgba(255, 255, 255, .12);    /* тонкие границы вместо теней */
+  --line-hot:  rgba(255, 255, 255, .32);    /* граница при наведении */
+
+  /* Шрифты */
+  --font:      "Geist", system-ui, sans-serif;
+  --mono:      "Geist Mono", ui-monospace, monospace;
+
+  /* Скругления: карточки умеренно, кнопки в форме «таблетки» */
+  --r-card:    16px;
+  --r-pill:    999px;
+
+  /* Анимации: короткие и незаметные — в этом и есть минимализм */
+  --fast:      .18s;
+  --slow:      .7s;
+  --ease:      cubic-bezier(.2, .7, .2, 1);
+
+  /* Ширина колонки и отступы между секциями */
+  --wrap:      1080px;
+  --gap:       clamp(80px, 12vw, 160px);
+}
+
+/* ============ База ============ */
+* { box-sizing: border-box; margin: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* Все секции центрируются в узкой колонке и дышат отступами */
+main > section, .nav, footer {
+  width: min(var(--wrap), 100% - 40px);
+  margin-inline: auto;
+}
+main > section { padding-block: var(--gap) 0; }
+
+/* ============ Шапка ============ */
+.nav {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between;
+  padding-block: 20px;
+  background: linear-gradient(var(--bg) 60%, transparent);  /* плавно скрывает контент под шапкой */
+}
+.logo { font-weight: 700; letter-spacing: -.02em; }
+.logo span { color: var(--text-3); }
+.nav nav { display: flex; gap: 28px; }
+.nav nav a { color: var(--text-2); font-size: 14px; transition: color var(--fast); }
+.nav nav a:hover { color: var(--text); }
+
+/* ============ Типографика ============ */
+/* Мелкая подпись над заголовком: моно, заглавные, широкий трекинг */
+.label {
+  font-family: var(--mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--text-3);
+  margin-bottom: 28px;
+}
+
+h1 {
+  font-size: clamp(44px, 8vw, 96px);   /* clamp = минимум, «гибкое» значение, максимум */
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -.04em;
+}
+h1 em { font-style: normal; color: var(--text-3); }
+
+h2 {
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 700;
+  letter-spacing: -.03em;
+  line-height: 1.1;
+  margin-bottom: 40px;
+}
+
+h3 { font-size: 20px; font-weight: 600; letter-spacing: -.01em; margin-bottom: 12px; }
+
+.lead { max-width: 520px; margin-top: 28px; font-size: 18px; color: var(--text-2); }
+
+/* ============ Кнопки ============ */
+.row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px; }
+
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: var(--r-pill);
+  font-size: 15px; font-weight: 500;
+  border: 1px solid var(--line);
+  transition: transform var(--fast) var(--ease), background var(--fast), border-color var(--fast);
+}
+.btn:hover  { transform: translateY(-2px); }
+.btn:active { transform: translateY(0); }
+
+.btn-solid { background: var(--text); color: var(--bg); border-color: var(--text); }
+.btn-solid:hover { background: rgba(255,255,255,.88); }
+.btn-ghost:hover { border-color: var(--line-hot); background: rgba(255,255,255,.04); }
+
+/* ============ Главный экран ============ */
+.hero { padding-top: clamp(60px, 12vw, 140px) !important; }
+
+/* ============ Карточки возможностей ============ */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));  /* сами перестраиваются под ширину */
+  gap: 16px;
+}
+.card {
+  padding: 28px;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  transition: border-color var(--fast), transform var(--fast) var(--ease);
+}
+.card:hover { border-color: var(--line-hot); transform: translateY(-3px); }
+.card p { color: var(--text-2); font-size: 15px; }
+.num { display: block; font-family: var(--mono); font-size: 12px; color: var(--text-3); margin-bottom: 40px; }
+
+/* Код внутри текста: моно-шрифт и еле заметная плашка */
+p code {
+  font-family: var(--mono);
+  font-size: .88em;
+  padding: 2px 6px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--text);
+}
+
+/* ============ Список команд ============ */
+.list { border-top: 1px solid var(--line); }
+.item {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 24px;
+  padding-block: 28px;
+  border-bottom: 1px solid var(--line);
+  transition: padding-left var(--fast) var(--ease);
+}
+.item:hover { padding-left: 12px; }       /* лёгкий сдвиг при наведении */
+.item code { font-family: var(--mono); font-size: 18px; }
+.item p { color: var(--text-2); }
+
+/* ============ Вкладки веток ============ */
+.tabs { display: inline-flex; gap: 4px; padding: 4px; border: 1px solid var(--line); border-radius: var(--r-pill); }
+.tabs button {
+  font: inherit; font-size: 14px; font-weight: 500;
+  padding: 8px 20px;
+  border: 0; border-radius: var(--r-pill);
+  background: none; color: var(--text-2);
+  cursor: pointer;
+  transition: background var(--fast), color var(--fast);
+}
+.tabs button:hover { color: var(--text); }
+.tabs button[aria-selected="true"] { background: var(--text); color: var(--bg); }
+
+.cards { list-style: none; padding: 0; margin-top: 32px; border-top: 1px solid var(--line); }
+.cards li {
+  display: grid;
+  grid-template-columns: 40px 1fr auto auto;
+  align-items: center;
+  gap: 20px;
+  padding-block: 18px;
+  border-bottom: 1px solid var(--line);
+  /* Каждая строка появляется чуть позже предыдущей — ступенчатая анимация */
+  animation: rise .45s var(--ease) both;
+  animation-delay: calc(var(--i) * 55ms);
+}
+.cards .n    { font-family: var(--mono); font-size: 12px; color: var(--text-3); }
+.cards .name { font-size: 18px; font-weight: 600; letter-spacing: -.01em; }
+.cards .xp   { font-family: var(--mono); font-size: 13px; color: var(--text-2); }
+.cards .mine { font-family: var(--mono); font-size: 12px; color: var(--text-3); min-width: 86px; text-align: right; }
+.cards .mine.high { color: var(--text); }        /* высокий шанс майнинга выделяем белым */
+
+.note { margin-top: 20px; font-size: 13px; color: var(--text-3); }
+
+/* ============ Подвал ============ */
+footer {
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  margin-top: var(--gap);
+  padding-block: 32px;
+  border-top: 1px solid var(--line);
+  font-size: 13px; color: var(--text-3);
+}
+footer a:hover { color: var(--text); }
+
+/* ============ Анимации ============ */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Элементы с классом .reveal скрыты, пока не попадут в экран.
+   script.js добавит им класс .in — и они плавно появятся. */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity var(--slow) var(--ease), transform var(--slow) var(--ease);
+  transition-delay: var(--d, 0s);
+}
+.reveal.in { opacity: 1; transform: none; }
+
+/* Если у человека в системе включено «уменьшить анимацию» — уважаем это */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .cards li { animation: none; }
+  .btn:hover, .card:hover { transform: none; }
+}
+
+/* ============ Телефоны ============ */
+@media (max-width: 640px) {
+  .nav nav { gap: 16px; }
+  .item { grid-template-columns: 1fr; gap: 8px; }
+  .cards li { grid-template-columns: 28px 1fr auto; }
+  .cards .mine { display: none; }
+}

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#000000">
+  <title>ForkBot</title>
+  <meta name="description" content="Открытый Discord-бот на TypeScript: следит за активностью участников и превращает общение в игру с видеокартами. Бери код и добавляй своё.">
+
+  <!-- Шрифты: Geist для текста, Geist Mono для мелких подписей -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============ Шапка ============ -->
+  <header class="nav">
+    <a class="logo" href="#top">Fork<span>Bot</span></a>
+    <nav>
+      <a href="#features">Возможности</a>
+      <a href="#commands">Команды</a>
+      <a href="#gpu">Видеокарты</a>
+      <a href="#open">Открытый код</a>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ Главный экран ============ -->
+    <section class="hero">
+      <p class="label reveal">Открытый Discord-бот · TypeScript</p>
+      <h1 class="reveal" style="--d:.08s">Бери код.<br><em>Добавляй своё.</em></h1>
+      <p class="lead reveal" style="--d:.16s">
+        ForkBot следит за активностью сервера и превращает каждое сообщение
+        в опыт для видеокарты. Код открыт: забирай целиком или вытащи
+        только нужные части в своего бота.
+      </p>
+      <div class="row reveal" style="--d:.24s">
+        <a class="btn btn-solid" href="#commands">Смотреть команды</a>
+        <a class="btn btn-ghost" href="https://github.com/DDS2x/discorfbot-ts" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </section>
+
+    <!-- ============ Возможности ============ -->
+    <section id="features">
+      <p class="label reveal">01 — Возможности</p>
+      <div class="grid">
+        <article class="card reveal">
+          <span class="num">/01</span>
+          <h3>Чистка неактивных</h3>
+          <p>Бот раз в сутки проверяет, кто давно молчит. Если участник не писал больше 30 дней и проигнорировал предупреждение 4 дня — он покидает сервер.</p>
+        </article>
+        <article class="card reveal" style="--d:.08s">
+          <span class="num">/02</span>
+          <h3>XP за сообщения</h3>
+          <p>Каждое сообщение даёт от 15 до 25 опыта. Не чаще раза в минуту — спамом прокачаться не выйдет.</p>
+        </article>
+        <article class="card reveal" style="--d:.16s">
+          <span class="num">/03</span>
+          <h3>Видеокарты и роли</h3>
+          <p>Три ветки развития, по шесть карт в каждой. За новую карту бот выдаёт роль, а иногда карта оказывается майненой.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ Команды ============ -->
+    <section id="commands">
+      <p class="label reveal">02 — Команды</p>
+      <div class="list">
+        <div class="item reveal">
+          <code>/my_status</code>
+          <p>Проверить, видит ли бот твою активность. Сбрасывает таймер неактивности.</p>
+        </div>
+        <div class="item reveal">
+          <code>/start-gpu</code>
+          <p>Начать игру и выбрать ветку: AMD, Intel или NVIDIA. Выбрать можно один раз.</p>
+        </div>
+        <div class="item reveal">
+          <code>/gpu</code>
+          <p>Показать свою видеокарту и прогресс. Можно посмотреть чужую или показать всем в чате.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Ветки видеокарт ============ -->
+    <section id="gpu">
+      <p class="label reveal">03 — Видеокарты</p>
+      <h2 class="reveal">Выбери ветку.</h2>
+
+      <div class="tabs reveal" role="tablist" aria-label="Ветка развития">
+        <button role="tab" aria-selected="true"  data-branch="amd">AMD</button>
+        <button role="tab" aria-selected="false" data-branch="intel">Intel</button>
+        <button role="tab" aria-selected="false" data-branch="nvidia">NVIDIA</button>
+      </div>
+
+      <!-- Список карт заполняется скриптом из script.js -->
+      <ul class="cards reveal" id="cards" aria-live="polite"></ul>
+      <p class="note reveal">«Майнен.» — шанс, что карта окажется бывшей в майнинге и прокачка с неё пойдёт медленнее.</p>
+    </section>
+
+    <!-- ============ Открытый код ============ -->
+    <section id="open">
+      <p class="label reveal">04 — Открытый код</p>
+      <h2 class="reveal">Твой бот.<br>Твои правила.</h2>
+      <div class="grid">
+        <article class="card reveal">
+          <span class="num">/01</span>
+          <h3>Форкни целиком</h3>
+          <p>Склонируй репозиторий, впиши свой токен в <code>.env</code> и запускай. Бот заработает на твоём сервере.</p>
+        </article>
+        <article class="card reveal" style="--d:.08s">
+          <span class="num">/02</span>
+          <h3>Возьми часть</h3>
+          <p>Игра с видеокартами лежит в отдельном файле <code>gpu.ts</code>, а база в <code>database.ts</code>. Подключай их к своему боту.</p>
+        </article>
+        <article class="card reveal" style="--d:.16s">
+          <span class="num">/03</span>
+          <h3>Настрой под себя</h3>
+          <p>Карты, XP, шансы и кулдаун собраны в блоке настроек вверху <code>gpu.ts</code>. Меняй числа или добавляй свои ветки.</p>
+        </article>
+      </div>
+      <p class="note reveal">В самом Discord бот называется DDSxBot. ForkBot — имя проекта с открытым кодом.</p>
+    </section>
+
+  </main>
+
+  <footer>
+    <span>© ForkBot</span>
+    <a href="https://github.com/DDS2x/discorfbot-ts" target="_blank" rel="noopener">Исходный код ↗</a>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
